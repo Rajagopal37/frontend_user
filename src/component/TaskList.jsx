@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
+const TaskList = ({ updateTask, deleteTask }) => {
+  const [tasks, setTasks] = useState([]); // Initialize as an empty array
   const [editIndex, setEditIndex] = useState(null);
   const [editedTask, setEditedTask] = useState({
     name: "",
@@ -17,20 +18,21 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
       try {
         const token = localStorage.getItem("token"); // Get token from localStorage
         const response = await axios.get(
-          "https://gopaltaskmanager.netlify.app/api/tasks",
+          "https://gopaltaskmanager.netlify.app/api/tasks", // Replace with your backend URL
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include token in headers
             },
           }
         );
-        setTasks(response.data);
+        console.log(response.data); // Check if the response data is correct
+        setTasks(Array.isArray(response.data) ? response.data : []); // Ensure response is an array
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
     };
     fetchTasks();
-  }, [setTasks]);
+  }, []);
 
   const handleEditClick = (index, task) => {
     setEditIndex(index);
@@ -41,7 +43,7 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       const response = await axios.put(
-        `https://backend-url.com/api/tasks/${tasks[index]._id}`,
+        `https://gopaltaskmanager.netlify.app/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
         editedTask,
         {
           headers: {
@@ -49,7 +51,7 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
           },
         }
       );
-      updateTask(index, response.data);
+      updateTask(index, response.data); // Update the task in parent component
       setEditIndex(null);
     } catch (error) {
       console.error("Error updating task:", error);
@@ -60,14 +62,14 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       await axios.delete(
-        `https://backend-url.com/api/tasks/${tasks[index]._id}`,
+        `https://gopaltaskmanager.netlify.app/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
         {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in headers
           },
         }
       );
-      deleteTask(index);
+      deleteTask(index); // Remove task from parent component
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -80,6 +82,15 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
     return true; // Return all tasks for "All" filter
   });
 
+  // Calculate task counts
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(
+    (task) => task.status === "Completed"
+  ).length;
+  const incompleteTasks = tasks.filter(
+    (task) => task.status === "Not Completed"
+  ).length;
+
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center my-3">
@@ -87,7 +98,21 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
           <h3 className="text-primary mb-0">Task Lists</h3>
         </div>
 
-        <div className="text-primary ">
+        {/* Task Counts */}
+        <div className="d-flex align-items-center">
+          <span className="bg-primary text-white fw-bold  px-3 py-2 mx-1 rounded-circle ">
+            {totalTasks}
+          </span>
+          <span className="bg-success text-white fw-bold   px-3 py-2 mx-1 rounded-circle">
+            {completedTasks}
+          </span>
+          <span className="bg-danger text-white fw-bold  px-3 py-2 mx-1 rounded-circle">
+            {incompleteTasks}
+          </span>
+        </div>
+
+        {/* Status Filter */}
+        <div className="text-primary">
           <label className="fs-5">Status Filter: </label>
           <select
             onChange={(e) => setFilter(e.target.value)}
@@ -135,7 +160,10 @@ const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
                       className="form-control mb-2"
                       value={editedTask.status}
                       onChange={(e) =>
-                        setEditedTask({ ...editedTask, status: e.target.value })
+                        setEditedTask({
+                          ...editedTask,
+                          status: e.target.value,
+                        })
                       }
                     >
                       <option value="Completed">Completed</option>
@@ -228,7 +256,8 @@ export default TaskList;
 // import { useState, useEffect } from "react";
 // import axios from "axios";
 
-// const TaskList = ({ tasks, setTasks, updateTask, deleteTask }) => {
+// const TaskList = ({ updateTask, deleteTask }) => {
+//   const [tasks, setTasks] = useState([]);
 //   const [editIndex, setEditIndex] = useState(null);
 //   const [editedTask, setEditedTask] = useState({
 //     name: "",
@@ -237,14 +266,19 @@ export default TaskList;
 //     assignDate: "",
 //     lastDate: "",
 //   });
-
-//   const [filter, setFilter] = useState("All"); // Track the status filter
+//   const [filter, setFilter] = useState("All");
 
 //   useEffect(() => {
 //     const fetchTasks = async () => {
 //       try {
+//         const token = localStorage.getItem("token"); // Get token from localStorage
 //         const response = await axios.get(
-//           "https://backend-srni.onrender.com/api/tasks"
+//           // "https://gopaltaskmanager.netlify.app/api/tasks",
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`, // Include token in headers
+//             },
+//           }
 //         );
 //         setTasks(response.data);
 //       } catch (error) {
@@ -261,9 +295,15 @@ export default TaskList;
 
 //   const handleSaveClick = async (index) => {
 //     try {
+//       const token = localStorage.getItem("token"); // Get token from localStorage
 //       const response = await axios.put(
-//         `https://backend-srni.onrender.com/api/tasks/${tasks[index]._id}`,
-//         editedTask
+//         // `https://backend-url.com/api/tasks/${tasks[index]._id}`,
+//         editedTask,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`, // Include token in headers
+//           },
+//         }
 //       );
 //       updateTask(index, response.data);
 //       setEditIndex(null);
@@ -274,28 +314,20 @@ export default TaskList;
 
 //   const handleDeleteClick = async (index) => {
 //     try {
+//       const token = localStorage.getItem("token"); // Get token from localStorage
 //       await axios.delete(
-//         `https://backend-srni.onrender.com/api/tasks/${tasks[index]._id}`
+//         // `https://backend-url.com/api/tasks/${tasks[index]._id}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`, // Include token in headers
+//           },
+//         }
 //       );
 //       deleteTask(index);
 //     } catch (error) {
 //       console.error("Error deleting task:", error);
 //     }
 //   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setEditedTask({ ...editedTask, [name]: value });
-//   };
-
-//   // Calculate task counts
-//   const totalTasks = tasks.length;
-//   const completedTasks = tasks.filter(
-//     (task) => task.status === "Completed"
-//   ).length;
-//   const incompleteTasks = tasks.filter(
-//     (task) => task.status === "Not Completed"
-//   ).length;
 
 //   // Filter Tasks Based on Status
 //   const filteredTasks = tasks.filter((task) => {
@@ -311,7 +343,6 @@ export default TaskList;
 //           <h3 className="text-primary mb-0">Task Lists</h3>
 //         </div>
 
-//         {/* Status Filter */}
 //         <div className="text-primary ">
 //           <label className="fs-5">Status Filter: </label>
 //           <select
@@ -323,19 +354,6 @@ export default TaskList;
 //             <option value="Completed">Completed</option>
 //             <option value="Not Completed">Incomplete</option>
 //           </select>
-//         </div>
-
-//         {/* Task Counts */}
-//         <div className="d-flex align-items-center">
-//           <span className="bg-primary text-white fw-bold  px-3 py-2 mx-1 rounded-circle ">
-//             {totalTasks}
-//           </span>
-//           <span className="bg-success text-white fw-bold   px-3 py-2 mx-1 rounded-circle">
-//             {completedTasks}
-//           </span>
-//           <span className="bg-danger text-white fw-bold  px-3 py-2 mx-1 rounded-circle">
-//             {incompleteTasks}
-//           </span>
 //         </div>
 //       </div>
 
@@ -352,45 +370,62 @@ export default TaskList;
 //                       name="name"
 //                       className="form-control mb-2"
 //                       value={editedTask.name}
-//                       onChange={handleInputChange}
+//                       onChange={(e) =>
+//                         setEditedTask({ ...editedTask, name: e.target.value })
+//                       }
 //                     />
 //                     <input
 //                       type="text"
 //                       name="description"
 //                       className="form-control mb-2"
 //                       value={editedTask.description}
-//                       onChange={handleInputChange}
+//                       onChange={(e) =>
+//                         setEditedTask({
+//                           ...editedTask,
+//                           description: e.target.value,
+//                         })
+//                       }
 //                     />
 //                     <select
 //                       name="status"
 //                       className="form-control mb-2"
 //                       value={editedTask.status}
-//                       onChange={handleInputChange}
+//                       onChange={(e) =>
+//                         setEditedTask({ ...editedTask, status: e.target.value })
+//                       }
 //                     >
 //                       <option value="Completed">Completed</option>
 //                       <option value="Not Completed">Incomplete</option>
 //                     </select>
-
 //                     <input
 //                       type="date"
 //                       name="assignDate"
 //                       className="form-control mb-2"
 //                       value={editedTask.assignDate.split("T")[0]}
-//                       onChange={handleInputChange}
+//                       onChange={(e) =>
+//                         setEditedTask({
+//                           ...editedTask,
+//                           assignDate: e.target.value,
+//                         })
+//                       }
 //                     />
 //                     <input
 //                       type="date"
 //                       name="lastDate"
 //                       className="form-control mb-2"
 //                       value={editedTask.lastDate.split("T")[0]}
-//                       onChange={handleInputChange}
+//                       onChange={(e) =>
+//                         setEditedTask({
+//                           ...editedTask,
+//                           lastDate: e.target.value,
+//                         })
+//                       }
 //                     />
 //                   </>
 //                 ) : (
 //                   <>
 //                     <h5 className="card-title">{task.name}</h5>
 //                     <p className="card-text">{task.description}</p>
-
 //                     <p className="card-text">
 //                       Assign Date:{" "}
 //                       {new Date(task.assignDate).toLocaleDateString()}
@@ -398,9 +433,7 @@ export default TaskList;
 //                     <p className="card-text">
 //                       Last Date: {new Date(task.lastDate).toLocaleDateString()}
 //                     </p>
-
 //                     <p className="card-text text-center fs-5">
-//                       {/* Status:{" "} */}
 //                       <span
 //                         className={`badge ${
 //                           task.status === "Completed"
@@ -410,14 +443,6 @@ export default TaskList;
 //                       >
 //                         {task.status}
 //                       </span>
-//                     </p>
-
-//                     <p className="card-text text-center fw-bold">
-//                       Remaining Days:{" "}
-//                       {Math.ceil(
-//                         (new Date(task.lastDate) - new Date()) /
-//                           (1000 * 60 * 60 * 24)
-//                       )}
 //                     </p>
 //                   </>
 //                 )}
