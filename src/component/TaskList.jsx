@@ -202,7 +202,7 @@ const TaskList = ({ updateTask, deleteTask }) => {
       try {
         const token = localStorage.getItem("token"); // Get token from localStorage
         const response = await axios.get(
-          "//https://backend-task-app-cq1a.onrender.com/api/tasks", // Replace with your backend URL
+          "https://backend-task-app-cq1a.onrender.com/api/tasks", // Replace with your backend URL
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include token in headers
