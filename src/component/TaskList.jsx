@@ -43,8 +43,7 @@ const TaskList = ({ updateTask, deleteTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       const response = await axios.put(
-        `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
-        editedTask,
+        `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in headers
@@ -62,7 +61,7 @@ const TaskList = ({ updateTask, deleteTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       await axios.delete(
-        `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
+        `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in headers
