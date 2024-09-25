@@ -33,8 +33,7 @@ const TaskForm = ({ addTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       const response = await axios.post(
-        // "https://backend-url.com/api/tasks",
-        // "https://gopaltaskmanager.netlify.app/api/tasks",
+        "https://backend-task-app-cq1a.onrender.com/api/tasks",
         task,
         {
           headers: {

@@ -18,7 +18,7 @@ const TaskList = ({ updateTask, deleteTask }) => {
       try {
         const token = localStorage.getItem("token"); // Get token from localStorage
         const response = await axios.get(
-          "https://gopaltaskmanager.netlify.app/api/tasks", // Replace with your backend URL
+          "https://https://backend-task-app-cq1a.onrender.com/api/tasks", // Replace with your backend URL
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include token in headers
@@ -43,7 +43,7 @@ const TaskList = ({ updateTask, deleteTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       const response = await axios.put(
-        `https://gopaltaskmanager.netlify.app/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
+        `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
         editedTask,
         {
           headers: {
@@ -62,7 +62,7 @@ const TaskList = ({ updateTask, deleteTask }) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
       await axios.delete(
-        `https://gopaltaskmanager.netlify.app/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
+        `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`, // Replace with your backend URL
         {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in headers
