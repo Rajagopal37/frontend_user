@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+    username: "",
     name: "",
     email: "",
     password: "",
@@ -49,6 +50,17 @@ const Signup = () => {
           <h3 className="mb-4 d-flex justify-content-center text-primary">
             Create an Account
           </h3>
+
+          <div className="form-group m-3 w-100">
+            <input
+              type="text"
+              name="username"
+              className="form-control mb-2"
+              placeholder="User Name"
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </div>
 
           <div className="form-group m-3 w-100">
             <input
