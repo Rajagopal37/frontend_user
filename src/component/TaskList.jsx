@@ -61,6 +61,12 @@ const TaskList = ({ updateTask, deleteTask }) => {
   const handleDeleteClick = async (index) => {
     try {
       const token = localStorage.getItem("token"); // Get token from localStorage
+
+      if (!token) {
+        console.error("Token not found.");
+        return;
+      }
+
       await axios.delete(
         `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
         {
@@ -69,7 +75,11 @@ const TaskList = ({ updateTask, deleteTask }) => {
           },
         }
       );
-      deleteTask(index); // Remove task from parent component
+
+      const updatedTasks = tasks.filter((_, i) => i !== index);
+      setTasks(updatedTasks);
+      console.log("Task deleted successfully");
+      // deleteTask(index); // Remove task from parent component
     } catch (error) {
       console.error("Error deleting task:", error);
     }
