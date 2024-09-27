@@ -11,17 +11,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-light">
+    <nav className="navbar navbar-light mb-3">
       <Link className="navbar-brand " to="/">
-        <h2 className="text-primary px-5 pt-2 ">Task Manager</h2>
+        <h1 className="text-primary px-5 pt-2 ">Task Manager</h1>
       </Link>
-      <ul className="navbar-nav ml-3">
+
+      <ul className="navbar-nav px-5 pt-2  ">
         {user ? (
           <>
-            <li className="nav-item">
+            <li className="nav-item ml-2">
               Welcome,<h5>{user.name}</h5>{" "}
             </li>
-            <li className="nav-item">
+            <li className="nav-item ml-2">
               <button onClick={handleLogout} className="btn btn-link">
                 Logout
               </button>
@@ -32,7 +33,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 to="/login"
-                className="nav-link text-danger fw-bold"
+                className="nav-link text-success fw-bold"
                 style={{ fontSize: "1rem", backgroundColor: "white" }}
               >
                 Login
@@ -41,7 +42,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link
                 to="/signup"
-                className="nav-link text-danger fw-bold"
+                className="nav-link text-success fw-bold"
                 style={{ fontSize: "1rem", backgroundColor: "white" }}
               >
                 Signup

@@ -44,7 +44,7 @@ const Login = () => {
     <div className="d-flex justify-content-center align-items-center">
       <div className="m-3 p-3 w-50 border border-3 border-primary rounded d-flex justify-content-center align-items-center">
         <form onSubmit={handleSubmit} className="m-3 p-1 w-75">
-          <h3 className="mb-4 d-flex justify-content-center text-primary">
+          <h3 className="mb-4 d-flex justify-content-center text-success">
             Login
           </h3>
           {error && <div className="alert alert-danger">{error}</div>}{" "}

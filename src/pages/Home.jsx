@@ -19,7 +19,6 @@ const Home = () => {
 
   return (
     <div>
-      <h3 className="text-center text-primary">Note Your Task </h3>
       <TaskForm addTask={addTask} />
       <TaskList
         tasks={tasks}

@@ -104,9 +104,15 @@ const TaskList = ({ updateTask, deleteTask }) => {
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center my-3">
+        <div>
+          <h3 className="text-primary ">Task Lists</h3>
+        </div>
+
         {/* Status Filter */}
-        <div className="text-primary">
-          <label className="fs-5">Status Filter: </label>
+        <div className="text-Dark">
+          <label className="fs-5">
+            <h5>Status Filter:</h5>{" "}
+          </label>
           <select
             onChange={(e) => setFilter(e.target.value)}
             value={filter}
@@ -116,10 +122,6 @@ const TaskList = ({ updateTask, deleteTask }) => {
             <option value="Completed">Completed</option>
             <option value="Not Completed">Incomplete</option>
           </select>
-        </div>
-
-        <div>
-          <h3 className="text-primary mb-0">Task Lists</h3>
         </div>
 
         {/* Task Counts */}

@@ -47,7 +47,7 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="m-3 p-1 w-75">
           {error && <p>{error}</p>}
 
-          <h3 className="mb-4 d-flex justify-content-center text-primary">
+          <h3 className="mb-4 d-flex justify-content-center text-success">
             Create an Account
           </h3>
 
