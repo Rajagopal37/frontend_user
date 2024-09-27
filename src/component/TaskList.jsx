@@ -1,187 +1,3 @@
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-
-// const TaskList = ({ updateTask, deleteTask }) => {
-//   const [tasks, setTasks] = useState([]); // Initialize tasks
-//   const [editIndex, setEditIndex] = useState(null);
-//   const [editedTask, setEditedTask] = useState({
-//     name: "",
-//     description: "",
-//     status: "Not Completed",
-//     assignDate: "",
-//     lastDate: "",
-//   });
-//   const [filter, setFilter] = useState("All");
-
-//   useEffect(() => {
-//     const fetchTasks = async () => {
-//       try {
-//         const token = localStorage.getItem("token"); // Get token from localStorage
-//         const response = await axios.get(
-//           "https://backend-task-app-cq1a.onrender.com/api/tasks", // Corrected URL
-//           {
-//             headers: {
-//               Authorization: `Bearer ${token}`, // Include token in headers
-//             },
-//           }
-//         );
-//         setTasks(Array.isArray(response.data) ? response.data : []); // Ensure response is an array
-//       } catch (error) {
-//         console.error("Error fetching tasks:", error);
-//       }
-//     };
-
-//     fetchTasks();
-//   }, []);
-
-//   const handleEditClick = (index, task) => {
-//     setEditIndex(index);
-//     setEditedTask(task);
-//   };
-
-//   const handleSaveClick = async (index) => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       const response = await axios.put(
-//         `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
-//         editedTask,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       updateTask(index, response.data);
-//       setEditIndex(null);
-//     } catch (error) {
-//       console.error("Error updating task:", error);
-//     }
-//   };
-
-//   const handleDeleteClick = async (index) => {
-//     try {
-//       const token = localStorage.getItem("token");
-//       await axios.delete(
-//         `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       deleteTask(index);
-//     } catch (error) {
-//       console.error("Error deleting task:", error);
-//     }
-//   };
-
-//   // Filter Tasks Based on Status
-//   const filteredTasks = tasks.filter((task) => {
-//     if (filter === "Completed") return task.status === "Completed";
-//     if (filter === "Not Completed") return task.status === "Not Completed";
-//     return true; // Return all tasks for "All" filter
-//   });
-
-//   return (
-//     <div>
-//       <div className="d-flex justify-content-between align-items-center my-3">
-//         <h3 className="text-primary mb-0">Task Lists</h3>
-//         <select
-//           onChange={(e) => setFilter(e.target.value)}
-//           value={filter}
-//           className="form-select"
-//         >
-//           <option value="All">All</option>
-//           <option value="Completed">Completed</option>
-//           <option value="Not Completed">Incomplete</option>
-//         </select>
-//       </div>
-
-//       <div className="row">
-//         {filteredTasks.map((task, index) => (
-//           <div className="col-md-3" key={index}>
-//             <div className="card mb-3">
-//               <div className="card-body">
-//                 {editIndex === index ? (
-//                   <>
-//                     <input
-//                       type="text"
-//                       name="name"
-//                       className="form-control mb-2"
-//                       value={editedTask.name}
-//                       onChange={(e) =>
-//                         setEditedTask({ ...editedTask, name: e.target.value })
-//                       }
-//                     />
-//                     <input
-//                       type="text"
-//                       name="description"
-//                       className="form-control mb-2"
-//                       value={editedTask.description}
-//                       onChange={(e) =>
-//                         setEditedTask({
-//                           ...editedTask,
-//                           description: e.target.value,
-//                         })
-//                       }
-//                     />
-//                     <select
-//                       name="status"
-//                       className="form-control mb-2"
-//                       value={editedTask.status}
-//                       onChange={(e) =>
-//                         setEditedTask({
-//                           ...editedTask,
-//                           status: e.target.value,
-//                         })
-//                       }
-//                     >
-//                       <option value="Completed">Completed</option>
-//                       <option value="Not Completed">Not Completed</option>
-//                     </select>
-//                   </>
-//                 ) : (
-//                   <>
-//                     <h5 className="card-title">{task.name}</h5>
-//                     <p className="card-text">{task.description}</p>
-//                     <p className="card-text">Status: {task.status}</p>
-//                   </>
-//                 )}
-
-//                 <div className="d-flex justify-content-between">
-//                   {editIndex === index ? (
-//                     <button
-//                       className="btn btn-success"
-//                       onClick={() => handleSaveClick(index)}
-//                     >
-//                       Save
-//                     </button>
-//                   ) : (
-//                     <button
-//                       className="btn btn-primary"
-//                       onClick={() => handleEditClick(index, task)}
-//                     >
-//                       Edit
-//                     </button>
-//                   )}
-//                   <button
-//                     className="btn btn-danger"
-//                     onClick={() => handleDeleteClick(index)}
-//                   >
-//                     Delete
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default TaskList;
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -435,3 +251,187 @@ const TaskList = ({ updateTask, deleteTask }) => {
 };
 
 export default TaskList;
+
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+
+// const TaskList = ({ updateTask, deleteTask }) => {
+//   const [tasks, setTasks] = useState([]); // Initialize tasks
+//   const [editIndex, setEditIndex] = useState(null);
+//   const [editedTask, setEditedTask] = useState({
+//     name: "",
+//     description: "",
+//     status: "Not Completed",
+//     assignDate: "",
+//     lastDate: "",
+//   });
+//   const [filter, setFilter] = useState("All");
+
+//   useEffect(() => {
+//     const fetchTasks = async () => {
+//       try {
+//         const token = localStorage.getItem("token"); // Get token from localStorage
+//         const response = await axios.get(
+//           "https://backend-task-app-cq1a.onrender.com/api/tasks", // Corrected URL
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`, // Include token in headers
+//             },
+//           }
+//         );
+//         setTasks(Array.isArray(response.data) ? response.data : []); // Ensure response is an array
+//       } catch (error) {
+//         console.error("Error fetching tasks:", error);
+//       }
+//     };
+
+//     fetchTasks();
+//   }, []);
+
+//   const handleEditClick = (index, task) => {
+//     setEditIndex(index);
+//     setEditedTask(task);
+//   };
+
+//   const handleSaveClick = async (index) => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       const response = await axios.put(
+//         `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
+//         editedTask,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+//       updateTask(index, response.data);
+//       setEditIndex(null);
+//     } catch (error) {
+//       console.error("Error updating task:", error);
+//     }
+//   };
+
+//   const handleDeleteClick = async (index) => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       await axios.delete(
+//         `https://backend-task-app-cq1a.onrender.com/api/tasks/${tasks[index]._id}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+//       deleteTask(index);
+//     } catch (error) {
+//       console.error("Error deleting task:", error);
+//     }
+//   };
+
+//   // Filter Tasks Based on Status
+//   const filteredTasks = tasks.filter((task) => {
+//     if (filter === "Completed") return task.status === "Completed";
+//     if (filter === "Not Completed") return task.status === "Not Completed";
+//     return true; // Return all tasks for "All" filter
+//   });
+
+//   return (
+//     <div>
+//       <div className="d-flex justify-content-between align-items-center my-3">
+//         <h3 className="text-primary mb-0">Task Lists</h3>
+//         <select
+//           onChange={(e) => setFilter(e.target.value)}
+//           value={filter}
+//           className="form-select"
+//         >
+//           <option value="All">All</option>
+//           <option value="Completed">Completed</option>
+//           <option value="Not Completed">Incomplete</option>
+//         </select>
+//       </div>
+
+//       <div className="row">
+//         {filteredTasks.map((task, index) => (
+//           <div className="col-md-3" key={index}>
+//             <div className="card mb-3">
+//               <div className="card-body">
+//                 {editIndex === index ? (
+//                   <>
+//                     <input
+//                       type="text"
+//                       name="name"
+//                       className="form-control mb-2"
+//                       value={editedTask.name}
+//                       onChange={(e) =>
+//                         setEditedTask({ ...editedTask, name: e.target.value })
+//                       }
+//                     />
+//                     <input
+//                       type="text"
+//                       name="description"
+//                       className="form-control mb-2"
+//                       value={editedTask.description}
+//                       onChange={(e) =>
+//                         setEditedTask({
+//                           ...editedTask,
+//                           description: e.target.value,
+//                         })
+//                       }
+//                     />
+//                     <select
+//                       name="status"
+//                       className="form-control mb-2"
+//                       value={editedTask.status}
+//                       onChange={(e) =>
+//                         setEditedTask({
+//                           ...editedTask,
+//                           status: e.target.value,
+//                         })
+//                       }
+//                     >
+//                       <option value="Completed">Completed</option>
+//                       <option value="Not Completed">Not Completed</option>
+//                     </select>
+//                   </>
+//                 ) : (
+//                   <>
+//                     <h5 className="card-title">{task.name}</h5>
+//                     <p className="card-text">{task.description}</p>
+//                     <p className="card-text">Status: {task.status}</p>
+//                   </>
+//                 )}
+
+//                 <div className="d-flex justify-content-between">
+//                   {editIndex === index ? (
+//                     <button
+//                       className="btn btn-success"
+//                       onClick={() => handleSaveClick(index)}
+//                     >
+//                       Save
+//                     </button>
+//                   ) : (
+//                     <button
+//                       className="btn btn-primary"
+//                       onClick={() => handleEditClick(index, task)}
+//                     >
+//                       Edit
+//                     </button>
+//                   )}
+//                   <button
+//                     className="btn btn-danger"
+//                     onClick={() => handleDeleteClick(index)}
+//                   >
+//                     Delete
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default TaskList;

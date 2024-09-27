@@ -15,10 +15,12 @@ const Navbar = () => {
       <Link className="navbar-brand " to="/">
         <h2 className="text-primary px-5 pt-2 ">Task Manager</h2>
       </Link>
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-3">
         {user ? (
           <>
-            <li className="nav-item">Welcome, {user.name}</li>
+            <li className="nav-item">
+              Welcome,<h5>{user.name}</h5>{" "}
+            </li>
             <li className="nav-item">
               <button onClick={handleLogout} className="btn btn-link">
                 Logout
