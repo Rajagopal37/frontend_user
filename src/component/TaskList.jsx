@@ -226,6 +226,14 @@ const TaskList = ({ updateTask, deleteTask }) => {
                         {task.status}
                       </span>
                     </p>
+
+                    <p className="card-text text-center fw-bold">
+                      Remaining Days:{" "}
+                      {Math.ceil(
+                        (new Date(task.lastDate) - new Date()) /
+                          (1000 * 60 * 60 * 24)
+                      )}
+                    </p>
                   </>
                 )}
 
