@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import "../src/App.jsx";
+import "../src/App.css";
 
 const App = () => {
   return (

@@ -56,7 +56,7 @@ const TaskForm = ({ addTask }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-3">
+    <form onSubmit={handleSubmit} className="mb-3 ">
       {error && <p className="text-danger">{error}</p>}
       <div className="form-group">
         <input
