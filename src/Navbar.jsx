@@ -8,13 +8,13 @@ const Navbar = () => {
 
   const navigate = useNavigate(); // For programmatic navigation using react-router-dom v6
 
-  // const handleLogout = () => {
-  //   logout();
-  //   localStorage.removeItem("token"); // Clear the token from localStorage
-  // };
+  const handleLogout = () => {
+    logout();
+    localStorage.removeItem("token"); // Clear the token from localStorage
+  };
 
   // Function to handle logout
-
+  /*
   const handleLogout = async () => {
     const token = localStorage.getItem("token"); // Get the token from localStorage
 
@@ -45,6 +45,7 @@ const Navbar = () => {
       }
     }
   };
+  */
 
   return (
     <nav className="navbar navbar-light mb-3">
