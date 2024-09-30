@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = () => {
   const { user, logout } = useContext(UserContext);
 
-  const navigate = useNavigate(); // For programmatic navigation using react-router-dom v6
+  //const navigate = useNavigate(); // For programmatic navigation using react-router-dom v6
 
   const handleLogout = () => {
     logout();
